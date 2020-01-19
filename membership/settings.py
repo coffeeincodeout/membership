@@ -25,7 +25,11 @@ SECRET_KEY = 'zp_b!#$=(z(4+4r^l@fxnge3fxr(n%xa-)(4z1&xzhi=tjhfnv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '*******.execute-api.us-east-2.amazonaws.com',
+    '4cjwfk2sze.execute-api.us-east-1.amazonaws.com'
+]
 
 
 # Application definition
@@ -100,7 +104,7 @@ DATABASES = {
         'NAME': 'members',
         'USER': 'dcarlo81',
         'PASSWORD': '3251motifes6',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

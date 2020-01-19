@@ -1,10 +1,12 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from .views import MembersDetailView, MembersListView
 from rest_framework import routers
-from useraccounts import views
+
+
 
 urlpatterns = [
+    url('', MembersListView.as_view()),
     url('listview/$', MembersListView.as_view()),
     url(r'listview/(?P<pk>[0-9]+)/$', MembersDetailView.as_view()),
 
