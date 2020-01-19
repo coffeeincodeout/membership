@@ -4,10 +4,10 @@ from rest_framework import serializers
 
 
 class MembersSerializer(serializers.ModelSerializer):
-    data = serializers.JSONField(encoder=True)
+    data = serializers.DictField()
     class Meta:
         model = Members
-        fields = ['data']
+        fields = ['pk', 'data']
 
 # class UserSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
