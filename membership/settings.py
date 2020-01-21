@@ -25,7 +25,7 @@ SECRET_KEY = 'zp_b!#$=(z(4+4r^l@fxnge3fxr(n%xa-)(4z1&xzhi=tjhfnv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '*.execute-api.us-east-1.amazonaws.com' ]
+ALLOWED_HOSTS = ['127.0.0.1', 'lpzyjitlr0.execute-api.us-east-1.amazonaws.com' ]
 
 # Application definition
 
@@ -94,22 +94,22 @@ WSGI_APPLICATION = 'membership.wsgi.application'
 #     }
 # }
 # local
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'members',
-        'USER': 'dcarlo81',
-        'PASSWORD': '3251motifes6',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'members',
+#         'USER': 'dcarlo81',
+#         'PASSWORD': '3251motifes6',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'members',
+        'NAME': 'memberships',
         'USER': 'dcarlo81',
         'PASSWORD': '3251motifes6',
         'HOST': 'members.c7cbyqvyumxu.us-east-1.rds.amazonaws.com',
