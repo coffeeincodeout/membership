@@ -25,12 +25,7 @@ SECRET_KEY = 'zp_b!#$=(z(4+4r^l@fxnge3fxr(n%xa-)(4z1&xzhi=tjhfnv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '*******.execute-api.us-east-2.amazonaws.com',
-    '4cjwfk2sze.execute-api.us-east-1.amazonaws.com'
-]
-
+ALLOWED_HOSTS = ['127.0.0.1', '*.execute-api.us-east-1.amazonaws.com' ]
 
 # Application definition
 
@@ -43,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'useraccounts.apps.UseraccountsConfig',
     'rest_framework',
+    'django_s3_storage',
 
 ]
 
@@ -57,15 +53,15 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-
-    ],
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 5
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
 }
+
 
 ROOT_URLCONF = 'membership.urls'
 
@@ -97,7 +93,7 @@ WSGI_APPLICATION = 'membership.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+# local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -105,6 +101,18 @@ DATABASES = {
         'USER': 'dcarlo81',
         'PASSWORD': '3251motifes6',
         'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+# production
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'members',
+        'USER': 'dcarlo81',
+        'PASSWORD': '3251motifes6',
+        'HOST': 'members.c7cbyqvyumxu.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -146,7 +154,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# looks for static files in different directories
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+
+S3_BUCKET = "zappa-du3kgz5xa"
+
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+
+AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET
+
+STATIC_URL = "https://%s.s3.amazonaws.com/" % S3_BUCKET
